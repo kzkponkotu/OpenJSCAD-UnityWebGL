@@ -7,6 +7,7 @@ using UnityEngine;
 public class ModelTransmit : MonoBehaviour {
 	[SerializeField]
 	private Material Mat;
+	public float Scale;
 	private List<Vector3> PolygonList = new List<Vector3>();
 	private List<int> PolygonTypeList = new List<int>();
 	private List<Vector3> ResultPolygonList = new List<Vector3>();
@@ -14,6 +15,7 @@ public class ModelTransmit : MonoBehaviour {
 	private Vector3 PushVec = new Vector3(0,0,0);
 
 	void Awake(){
+		gameObject.transform.localScale = new Vector3 (gameObject.transform.localScale.x * Scale,gameObject.transform.localScale.y * Scale,gameObject.transform.localScale.z * Scale);
 		//Unityが起動したかどうか
 		Application.ExternalCall("UnityAwake");
 	}
