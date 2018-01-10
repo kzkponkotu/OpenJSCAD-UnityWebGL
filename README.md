@@ -46,6 +46,12 @@ OpenJSCADで作ったモデルをUnityWebGLに転送して表示できる．
 
 * ModelTransmitコンポーネントのScaleを変更することでモデルのスケールを変更できる(Unityは1単位**1m**，OpenJSCADは1単位**1mm**，1でOpenJSCADに1000でUnityに大きさを合わせる)．
 
+* もっと色んなことをしたい場合はModelTransmit.csを書き換える．
+
 ![マテリアルとスケールの変更](https://i.gyazo.com/7e9c867d80ca1ab83391aa0ff938a4ce.png)
 
-* もっと色んなことをしたい場合はModelTransmit.csを書き換える．
+* WebGLInputManagerのWebGLInputFlagコンポーネントのプロパティを設定することでキーボードフォーカスの設定ができる．
+
+* UnityForcusFlagがtrueならUnityにキーボードのフォーカスが移る，inputタグの入力が受け付けなくなるので初期設定はfalseにしてある．
+
+![UnityのフォーカスON/OFF](https://i.gyazo.com/433041fbdfa6d556644361809f85f1b9.png)
