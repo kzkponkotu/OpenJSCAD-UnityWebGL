@@ -2,7 +2,7 @@
 
 ## 概要
 
-OpenJSCADで作ったモデルをUnityWebGLに転送して表示できる
+OpenJSCADで作ったモデルをUnityWebGLに転送して表示できる．
 
 ![OpenJSCAD-UnityWebGL.html](https://i.gyazo.com/e6299a972f38430ba2b463beb6012307.gif)
 ## デモ
