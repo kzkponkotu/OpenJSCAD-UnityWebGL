@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<!--
+
+== OpenJSCAD.org, Copyright (c) 2016-2017, Licensed under MIT License ==
+   in conjunction with other libraries by various authors (see the individual files)
+
+Purpose:
+  This application provides an example of how to show JSCAD designs with minimal HTML and CSS.
+-->
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <title>OpenJSCAD.org Logo</title>
+  <link rel="stylesheet" href="min.css" type="text/css">
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Unity WebGL Player | UnityModelViewer</title>
+  <link rel="shortcut icon" href="TemplateData/favicon.ico">
+  <link rel="stylesheet" href="TemplateData/style.css">
+  <script src="TemplateData/UnityProgress.js"></script>
+  <script src="Build/UnityLoader.js"></script>
+  <script>
+    let UnityOn = false;
+    let OpenJSCADOn = false;
+    let OpenJSCADPolygons = new Array();
+    let OpenJSCADPolygonTypes = new Array();
+    var gameInstance = UnityLoader.instantiate("gameContainer", "Build/soy_simu_temp.json", { onProgress: UnityProgress });
+    function UnityAwake() {
+      UnityOn = true;
+      if (UnityOn && OpenJSCADOn) OpenJSCADModelTransmit();
+    }
+
+    function OpenJSCADModelTransmit() {
+      for (let i = 0; i < OpenJSCADPolygons.length; i++) {
+        gameInstance.SendMessage('OpenJSCADModel', 'PushVertex', OpenJSCADPolygons[i][0]);
+        gameInstance.SendMessage('OpenJSCADModel', 'PushVertex', OpenJSCADPolygons[i][1]);
+        gameInstance.SendMessage('OpenJSCADModel', 'PushVertex', OpenJSCADPolygons[i][2]);
+      }
+      for (let i = 0; i < OpenJSCADPolygonTypes.length; i++) {
+        gameInstance.SendMessage('OpenJSCADModel', 'PushPolygonType', OpenJSCADPolygonTypes[i]);
+      }
+      gameInstance.SendMessage('OpenJSCADModel', 'MakeModel');
+      OpenJSCADPolygons = new Array();
+    }
+
+  </script>
+
+</head>
+
+<body>
+  <script src="dist/min.js"></script>
+  <!-- setup display of the errors as required by OpenJSCAD.js -->
+  <div class="jscad-container">
+    <div id="header">
+      <div id="errordiv">hello</div>
+    </div>
+
+    <!-- setup display of the viewer, i.e. canvas -->
+    <div oncontextmenu="return false;" id="viewerContext" design-url="sphere.jscad"></div>
+
+    <!-- setup display of the status, as required by OpenJSCAD.js -->
+    <!-- set display: block to display this -->
+    <div id="tail">
+      <div id="statusdiv"></div>
+    </div>
+  </div>
+
+  <div class="webgl-content">
+    <div id="gameContainer" style="width: 960px; height: 600px"></div>
+    <div class="footer">
+      <div class="webgl-logo"></div>
+      <div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
+      <div class="title">UnityModelViewer</div>
+    </div>
+  </div>
+
+</body>
+
+</html>
